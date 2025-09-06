@@ -9,7 +9,7 @@ def parse_args() -> argparse.Namespace:
                     "sorting by subdirectories based on extension."
     )
     p.add_argument("src", type=Path, help="path to source directory")
-    p.add_argument("dest", nargs="?", default=Path("dist"), type=Path, help="path to destination directory (default): ./dist)")
+    p.add_argument("dest", nargs="?", default=Path("dist"), type=Path, help="path to destination directory (default: ./dist)")
     return p.parse_args()
 
 def copy_file(file_path: Path, dest_root: Path) -> None:
@@ -17,7 +17,7 @@ def copy_file(file_path: Path, dest_root: Path) -> None:
     Copy a file to the destination directory, creating subdirectories as needed.
     If file already exists, add suffix (_1, _2, ...) to avoid overwriting.
     """
-    ext = file_path.suffix.lower().lstrip(".") or "_noext"
+    ext = "".join(file_path.suffixes).lstrip(".").lower() or "_noext"
     result_path = dest_root / ext
     try:
         result_path.mkdir(parents=True, exist_ok=True)
