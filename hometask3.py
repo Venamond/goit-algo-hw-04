@@ -171,6 +171,7 @@ def result_table(rows: list[tuple], headers: tuple[str, ...]) -> str:
     return "\n".join(lines)
 
 def parse_args():
+    '''Parse command line arguments.'''
     p = argparse.ArgumentParser(
         description="Benchmark Insertion, Merge and Timsort"
     )
